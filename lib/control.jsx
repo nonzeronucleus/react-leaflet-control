@@ -12,6 +12,7 @@ const DumbControl = Control.extend({
   onAdd(/* map */) {
     var _controlDiv = DomUtil.create("div", this.options.className);
     DomEvent.disableClickPropagation(_controlDiv);
+    this.setState({'container': this.leafletElement.getContainer()});
     return _controlDiv;
   },
 
@@ -32,12 +33,12 @@ export default withLeaflet(
 
     render() {
       console.log(this.leafletElement);
-      if (!this.leafletElement || !this.leafletElement.getContainer()) {
+      if (!this.leafletElement || !this.state.container) {
         return null;
       }
       return ReactDOM.createPortal(
         this.props.children,
-        this.leafletElement.getContainer()
+        this.state.container
       );
     }
   }

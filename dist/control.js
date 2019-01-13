@@ -32,6 +32,7 @@ var DumbControl = _leaflet.Control.extend({
   onAdd: function onAdd() /* map */{
     var _controlDiv = _leaflet.DomUtil.create("div", this.options.className);
     _leaflet.DomEvent.disableClickPropagation(_controlDiv);
+    this.setState({ 'container': this.leafletElement.getContainer() });
     return _controlDiv;
   },
   onRemove: function onRemove(map) {
@@ -60,10 +61,11 @@ exports.default = (0, _reactLeaflet.withLeaflet)(function (_MapControl) {
   }, {
     key: "render",
     value: function render() {
-      if (!this.leafletElement || !this.leafletElement.getContainer()) {
+      console.log(this.leafletElement);
+      if (!this.leafletElement || !this.state.container) {
         return null;
       }
-      return _reactDom2.default.createPortal(this.props.children, this.leafletElement.getContainer());
+      return _reactDom2.default.createPortal(this.props.children, this.state.container);
     }
   }]);
 
