@@ -31,6 +31,7 @@ export default withLeaflet(
     }
 
     render() {
+      console.log(this.leafletElement);
       if (!this.leafletElement || !this.leafletElement.getContainer()) {
         return null;
       }
